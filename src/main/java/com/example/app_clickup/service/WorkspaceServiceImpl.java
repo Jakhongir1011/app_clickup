@@ -152,7 +152,9 @@ public class WorkspaceServiceImpl implements WorkspaceService{
             );
                     workspaceUserRepository.save(workspaceUser);
                     return new ApiResponse("added workspaceUser",true);
+
   //TODO EMAILGA INVITE XABAR YUBORISH   // manashu ishhonaga sizni taklif qilyapti deb emailga habar yuborishimiz kk va joinToWorkspace shunga linkka otib yuborishi kerak
+
                 case EDIT:
                     WorkspaceUser workspaceUser1 = workspaceUserRepository.findByWorkspaceIdAndUserId(id, memberDto.getId()).orElseGet(WorkspaceUser::new);
                     workspaceUser1.setWorkspaceRole(workspaceRoleRepository.findById(memberDto.getRoleId()).orElseThrow(()->new RuntimeException("id")));
