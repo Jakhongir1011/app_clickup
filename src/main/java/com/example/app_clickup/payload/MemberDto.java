@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Timestamp;
 import java.util.UUID;
 
 @Data
@@ -13,6 +14,14 @@ import java.util.UUID;
 public class MemberDto {
 
     private UUID id;
+
+    private String fullName;
+
+    private String email;
+
+    private String roleName;
+
+    private Timestamp lastActive;
 
     private UUID roleId;
 

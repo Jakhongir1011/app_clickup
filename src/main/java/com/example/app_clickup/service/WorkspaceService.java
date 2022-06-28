@@ -5,6 +5,7 @@ import com.example.app_clickup.payload.ApiResponse;
 import com.example.app_clickup.payload.MemberDto;
 import com.example.app_clickup.payload.WorkspaceDto;
 
+import java.util.List;
 import java.util.UUID;
 
 public interface WorkspaceService {
@@ -21,4 +22,8 @@ public interface WorkspaceService {
     ApiResponse addOrEditOrRemoveWorkspaceService(Long id, MemberDto memberDto);
 
     ApiResponse joinToWorkspace(Long id, User user);
+
+    List<MemberDto> getMemberAnsGuest(Long id);
+
+    List<WorkspaceDto> getMyWorkspaceService(User user);
 }

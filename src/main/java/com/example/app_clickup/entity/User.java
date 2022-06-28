@@ -11,6 +11,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -57,6 +58,8 @@ public class User extends AbsUUIDEntity implements UserDetails {
     private boolean credentialsNonExpired = true;
 
     private boolean enabled;
+
+    private Timestamp lastActiveTime;
 
     // BU USERNING XUQUQLAR ROYXATLARI
     @Override

@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -63,5 +64,15 @@ public class WorkspaceController {
         return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
     }
 
+    @GetMapping("/member/{id}")
+    public HttpEntity<?> getMemberAnsGuest(@PathVariable Long id){
+        List<MemberDto> memberDtoList = workspaceService.getMemberAnsGuest(id);
+        return ResponseEntity.ok(memberDtoList);
+    }
 
+    // CurrentUser this  anatomising tismiga kiribtusrgan authentication bo'ilib turgan odamni olib beradi
+    @GetMapping HttpEntity<?> getMyWorkspace(@CurrentUser User user){
+            List<WorkspaceDto> workspace = workspaceService.getMyWorkspaceService(user);
+            return ResponseEntity.ok(workspace);
+    }
 }

@@ -13,6 +13,8 @@ import java.util.UUID;
 @NoArgsConstructor
 public class WorkspaceDto {
 
+    private Long id;
+
     @NotNull(message = "name is available")
     private String name;
 
@@ -21,5 +23,10 @@ public class WorkspaceDto {
 
 
     private UUID avatarId;
+
+    private String initialLetter;
+
+
+
 
 }

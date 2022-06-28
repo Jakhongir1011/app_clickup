@@ -182,5 +182,63 @@ public class WorkspaceServiceImpl implements WorkspaceService{
         return new ApiResponse("Error", false);
     }
 
+    @Override
+    public List<MemberDto> getMemberAnsGuest(Long id) {
+
+//        1-usul
+        List<WorkspaceUser> workspaceUsers = workspaceUserRepository.findAllByWorkspaceId(id);
+        List<MemberDto> members = new ArrayList<>();
+        for (WorkspaceUser workspaceUser : workspaceUsers) {
+            members.add(mapWorkspaceUserToMemberDto(workspaceUser));
+        }
+        return members;
+
+//    2-usul
+//        return workspaceUsers.stream().map(this::mapWorkspaceUserToMemberDto).collect(Collectors.toList());
+    }
+
+    @Override // biz hozir manashu kirib turgan userni workspaces ni qaytarishimiz kerak
+    public List<WorkspaceDto> getMyWorkspaceService(User user) {
+        List<WorkspaceUser> workspaceUser = workspaceUserRepository.findAllByUserId(user.getId());
+        List<WorkspaceDto> workspaceDtoList = new ArrayList<>();
+        for (WorkspaceUser workspaceUser1 : workspaceUser) {
+            workspaceDtoList.add(mapWorkspaceUserToWorkspaceDto(workspaceUser1));
+        }
+        return workspaceDtoList;
+    }
+
+
+
+
+
+
+    // MY METHOD
+
+
+    public WorkspaceDto mapWorkspaceUserToWorkspaceDto(WorkspaceUser workspaceUser){
+        WorkspaceDto workspaceDto = new WorkspaceDto();
+        workspaceDto.setId(workspaceUser.getWorkspace().getId());
+        workspaceDto.setName(workspaceUser.getWorkspace().getName());
+        workspaceDto.setInitialLetter(workspaceUser.getWorkspace().getInitialLetter());
+        workspaceDto.setAvatarId(workspaceUser.getWorkspace().getAvatar()==null?null:workspaceUser.getWorkspace().getAvatar().getId());
+        workspaceDto.setColor(workspaceUser.getWorkspace().getColor());
+        return workspaceDto;
+    }
+
+
+
+
+    public MemberDto mapWorkspaceUserToMemberDto(WorkspaceUser workspaceUser){
+        MemberDto memberDto = new MemberDto();
+        memberDto.setId(workspaceUser.getUser().getId()); // userni id sini oldik
+        memberDto.setFullName(workspaceUser.getUser().getFullName()); // userni fullname
+        memberDto.setEmail(workspaceUser.getUser().getEmail());  // user ni email
+        memberDto.setRoleName(workspaceUser.getWorkspaceRole().getName()); // user role name
+        memberDto.setLastActive(workspaceUser.getUser().getLastActiveTime());
+        return  memberDto ;
+    }
+
+
+
 
 }
