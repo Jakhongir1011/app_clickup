@@ -1,6 +1,7 @@
 package com.example.app_clickup.payload;
 
 import com.example.app_clickup.entity.enums.AddType;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,6 +12,7 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL) // nul larni bervorma degani
 public class MemberDto {
 
     private UUID id;

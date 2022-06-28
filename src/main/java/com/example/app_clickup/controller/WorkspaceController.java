@@ -4,6 +4,7 @@ import com.example.app_clickup.entity.User;
 import com.example.app_clickup.payload.ApiResponse;
 import com.example.app_clickup.payload.MemberDto;
 import com.example.app_clickup.payload.WorkspaceDto;
+import com.example.app_clickup.payload.WorkspaceRoleDto;
 import com.example.app_clickup.security.CurrentUser;
 import com.example.app_clickup.service.WorkspaceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,7 @@ public class WorkspaceController {
 
     @PutMapping("/{id}")
     public HttpEntity<?> editWorkspace(@Valid @PathVariable Long id, @RequestBody WorkspaceDto workspaceDto){
-        ApiResponse apiResponse =  workspaceService.editWorkspace(id,workspaceDto);
+        ApiResponse apiResponse =  workspaceService.editWorkspace(workspaceDto);
         return ResponseEntity.status(apiResponse.isSuccess()?200:409).body(apiResponse);
     }
 
@@ -74,5 +75,13 @@ public class WorkspaceController {
     @GetMapping HttpEntity<?> getMyWorkspace(@CurrentUser User user){
             List<WorkspaceDto> workspace = workspaceService.getMyWorkspaceService(user);
             return ResponseEntity.ok(workspace);
+    }
+
+
+
+    @PutMapping("/addOrRemovePermission")
+    public HttpEntity<?> addOrRemoveRolePermissionToRole(@RequestBody WorkspaceRoleDto workspaceRoleDto){
+        ApiResponse apiResponse =  workspaceService.addOrRemoveRolePermissionToRole(workspaceRoleDto);
+    return ResponseEntity.status(apiResponse.isSuccess()?201:407).body(apiResponse);
     }
 }

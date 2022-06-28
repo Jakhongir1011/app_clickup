@@ -4,16 +4,16 @@ import com.example.app_clickup.entity.User;
 import com.example.app_clickup.payload.ApiResponse;
 import com.example.app_clickup.payload.MemberDto;
 import com.example.app_clickup.payload.WorkspaceDto;
+import com.example.app_clickup.payload.WorkspaceRoleDto;
 
 import java.util.List;
 import java.util.UUID;
 
 public interface WorkspaceService {
 
-
     ApiResponse addWorkspace(WorkspaceDto workspaceDto, User user);
 
-    ApiResponse editWorkspace(Long id, WorkspaceDto workspaceDto);
+    ApiResponse editWorkspace(WorkspaceDto workspaceDto);
 
     ApiResponse changeOwnerWorkspace(Long id, UUID ownerId);
 
@@ -26,4 +26,6 @@ public interface WorkspaceService {
     List<MemberDto> getMemberAnsGuest(Long id);
 
     List<WorkspaceDto> getMyWorkspaceService(User user);
+
+    ApiResponse addOrRemoveRolePermissionToRole(WorkspaceRoleDto workspaceRoleDto);
 }
